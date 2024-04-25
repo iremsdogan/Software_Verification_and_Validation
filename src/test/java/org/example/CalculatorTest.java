@@ -19,9 +19,18 @@ class CalculatorParameterizedTest {    // I created the CalculatorParameterizedT
             "12.5, 2.5, 5",
             "10, 2.5, 4",
             "12.5, 5, 2.5",
+            "12.5, 0, 0"
     })
     void testDivision(float dividend, float divisor, float expected) {
-        float result = Calculator.divide(dividend, divisor);
-        assertEquals(expected, result);
+        if(divisor == 0){
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> Calculator.divide(dividend, divisor)
+            );
+        }
+        else{
+            float result = Calculator.divide(dividend, divisor);
+            assertEquals(expected, result);
+        }
     }
 }
